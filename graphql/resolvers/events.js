@@ -3,9 +3,12 @@ const Event = require('../../models/event');
 const User = require("../../models/user")
 
 const { transformEvent } = require('./merge');
+
+// const isAuth = require("../../middleware/is-auth")
   
 module.exports = {
-    events: async () => {
+    events: async (args, context, parent) => {
+
       try {
         const events = await Event.find();
         return events.map(event => {
@@ -21,13 +24,13 @@ module.exports = {
         description: args.eventInput.description,
         price: args.eventInput.price?args.eventInput.price:0,
         date: Date.now().toString(),
-        creator: '6151e6f76eac3665e499dec8'
+        creator: args.eventInput.userId
       });
       let createdEvent;
       try {
         const result = await event.save();
         createdEvent = transformEvent(result);
-        const creator = await User.findById('6151e6f76eac3665e499dec8');
+        const creator = await User.findById(args.eventInput.userId);
   
         if (!creator) {
           throw new Error('User not found.');

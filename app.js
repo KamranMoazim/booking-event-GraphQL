@@ -1,11 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require("cors");
 const {graphqlHTTP} = require('express-graphql');
 // const { buildSchema } = require('graphql');
 const mongoose = require('mongoose');
 // const bcrypt = require('bcryptjs');
 
-const PORT = 5000;
+const PORT = 8000;
 // const Event = require('./models/event');
 // const User = require('./models/user');
 const graphQlSchema = require('./graphql/schema/index');
@@ -17,15 +18,16 @@ const app = express();
 // const events = [];
 
 app.use(bodyParser.json());
+app.use(cors());
 
-app.use(isAuth);
+// app.use(isAuth);
 
 app.use(
     '/graphql',
     graphqlHTTP({
-      schema: graphQlSchema,
-      rootValue: graphQlResolvers,
-      graphiql: true
+        schema: graphQlSchema,
+        rootValue: graphQlResolvers,
+        graphiql: true,
     })
 );
 

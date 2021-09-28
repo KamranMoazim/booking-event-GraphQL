@@ -1,0 +1,75 @@
+#*****************************************************
+# query {
+#   events {
+#     _id
+#     title
+#     price
+#     description
+#     date
+#   }
+# }
+# query{
+#   bookings {
+#     _id 
+#     event {
+#       title
+#       price
+#     }
+#     user {
+#       email
+#     }
+#   }
+# }
+# query {
+#   login(email:"123@123.123", password:"123"){
+#     userId
+#     token
+#     tokenExpiration
+#   }
+# }
+#*****************************************************
+
+
+
+
+#*****************************************************
+# mutation {
+#   createUser(userInput:{email:"456@456.456",password:"456"}){
+#     _id
+#     email
+#   }
+# }
+# mutation {
+#   createEvent(eventInput:{title:"one", userId:"6152a90f92059633f893f0fc", description:"one", price:100}){
+#     _id
+#     title
+#     description
+#     date
+#     price
+#     creator {
+#       _id
+#       email
+#     }
+#   }
+# }
+# mutation {
+#   bookEvent(userId:"6152a97292059633f893f101", eventId:"6152a9f692059633f893f104"){
+#     event{
+#       title
+#       price
+#     }
+#     user{
+#       email
+#     }
+#   }
+# }
+# mutation {
+#   cancelBooking(bookingId:"6152aa5592059633f893f10b"){
+#     title
+#     price
+#     creator {
+#       email
+#     }
+#   }
+# }
+#*****************************************************
